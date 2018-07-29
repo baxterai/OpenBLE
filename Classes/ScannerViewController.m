@@ -167,7 +167,7 @@
     
     [cell.uuid setText:[[peripheral identifier] UUIDString]];
 
-    if([peripheral isConnected])
+    if(peripheral.state == CBPeripheralStateConnected)
     {
         [cell.status setText:@"Connected"];
     }else
