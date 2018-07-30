@@ -137,9 +137,8 @@
         CFUUIDRef uuid = CFUUIDCreateFromString(NULL, (CFStringRef)deviceUUIDString);
         if (!uuid)
             continue;
-		
-		NSLog(@"loadSavedDevices is dysfunctional (requires depreciated centralManager retrievePeripherals)");
-        //[centralManager retrievePeripherals:[NSArray arrayWithObject:(__bridge id)uuid]];
+        
+        [centralManager retrievePeripherals:[NSArray arrayWithObject:(__bridge id)uuid]];
         CFRelease(uuid);
     }
 }
@@ -249,8 +248,7 @@
 		{
 			pendingInit = NO;
 			[self loadSavedDevices];
-			NSLog(@"centralManagerDidUpdateState:CBCentralManagerStatePoweredOn is dysfunctional (requires depreciated centralManager retrieveConnectedPeripherals)");
-			//[centralManager retrieveConnectedPeripherals];
+			[centralManager retrieveConnectedPeripherals];
 			[discoveryDelegate discoveryDidRefresh];
 			break;
 		}
@@ -320,7 +318,7 @@
 /****************************************************************************/
 - (void) connectPeripheral:(CBPeripheral*)peripheral
 {
-	if (peripheral.state != CBPeripheralStateConnected) {
+	if (![peripheral isConnected]) {
 		[centralManager connectPeripheral:peripheral options:connectOptions];
 	}
 }

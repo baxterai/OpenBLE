@@ -204,7 +204,7 @@
 			readCharacteristic = characteristic;
             [peripheral setNotifyValue:YES forCharacteristic:characteristic];
 		}
-        if ([writeCBUUIDs containsObject:[characteristic UUID]]) { // Write	//MODIFIED
+        else if ([writeCBUUIDs containsObject:[characteristic UUID]]) { // Write
             NSLog(@"Discovered Write Characteristic");
 			writeCharacteristic = characteristic;
 		} 
@@ -240,15 +240,14 @@
         return;
     }
 
-	if([writeWithResponseCBUUIDs containsObject:writeCharacteristic])	//MODIFIED
-	{
-		[servicePeripheral writeValue:data forCharacteristic:writeCharacteristic type:CBCharacteristicWriteWithResponse];
-	}
-	else
-	{
-		[servicePeripheral writeValue:data forCharacteristic:writeCharacteristic type:CBCharacteristicWriteWithoutResponse];
-		[peripheralDelegate didWriteFromService:self withError:nil];
-	}
+    if([writeWithResponseCBUUIDs containsObject:writeCharacteristic])
+    {
+        [servicePeripheral writeValue:data forCharacteristic:writeCharacteristic type:CBCharacteristicWriteWithoutResponse];
+        [peripheralDelegate didWriteFromService:self withError:nil];
+    }
+    else{
+        [servicePeripheral writeValue:data forCharacteristic:writeCharacteristic type:CBCharacteristicWriteWithResponse];
+    }
 }
 
 /** If we're connected, we don't want to be getting read change notifications while we're in the background.
