@@ -204,7 +204,7 @@
 			readCharacteristic = characteristic;
             [peripheral setNotifyValue:YES forCharacteristic:characteristic];
 		}
-        else if ([writeWithResponseCBUUIDs containsObject:[characteristic UUID]] || [writeWithoutResponseCBUUIDs containsObject:[characteristic UUID]]) { // Write
+        if ([writeWithResponseCBUUIDs containsObject:[characteristic UUID]] || [writeWithoutResponseCBUUIDs containsObject:[characteristic UUID]]) { // Write
             NSLog(@"Discovered Write Characteristic");
 			writeCharacteristic = characteristic;
 		} 
