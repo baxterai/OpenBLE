@@ -4,21 +4,19 @@
 <dict>
 	<key>service-uuids</key>
 	<array>
-		<string>FFF0</string>
-		<string>713D0000-503E-4C75-BA94-3148F18D941E</string>
+		<string>FFE0</string>
 	</array>
 	<key>write-without-response-uuids</key>
 	<array>
-		<string>713D0003-503E-4C75-BA94-3148F18D941E</string>
+		<string>FFE1</string>
 	</array>
 	<key>write-with-response-uuids</key>
 	<array>
-		<string>FFF2</string>
+		<string>FFE9</string>
 	</array>
 	<key>read-uuids</key>
 	<array>
-		<string>FFF1</string>
-		<string>713D0002-503E-4C75-BA94-3148F18D941E</string>
+		<string>FFE1</string>
 	</array>
 </dict>
 </plist>
