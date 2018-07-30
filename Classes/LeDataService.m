@@ -80,7 +80,7 @@
         
         serviceCBUUIDs=[[NSMutableArray alloc] init];
         writeWithResponseCBUUIDs=[[NSMutableArray alloc] init];
-        writeWithResponseCBUUIDs=[[NSMutableArray alloc] init];
+        writeWithoutResponseCBUUIDs=[[NSMutableArray alloc] init];
 
         readCBUUIDs=[[NSMutableArray alloc] init];
         
