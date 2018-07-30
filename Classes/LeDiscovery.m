@@ -137,8 +137,9 @@
         CFUUIDRef uuid = CFUUIDCreateFromString(NULL, (CFStringRef)deviceUUIDString);
         if (!uuid)
             continue;
-        
-        [centralManager retrievePeripherals:[NSArray arrayWithObject:(__bridge id)uuid]];
+		
+		//DEPRECIATED: [centralManager retrievePeripherals:[NSArray arrayWithObject:(__bridge id)uuid]];
+        [centralManager retrievePeripheralsWithIdentifiers:[NSArray arrayWithObject:(__bridge id)uuid]];
         CFRelease(uuid);
     }
 }
@@ -248,7 +249,17 @@
 		{
 			pendingInit = NO;
 			[self loadSavedDevices];
-			[centralManager retrieveConnectedPeripherals];
+			
+			//DEPRECIATED: [centralManager retrieveConnectedPeripherals];
+			NSMutableArray *CBUUIDarray = [NSMutableArray array];
+			CBPeripheral *_peripheral;
+			for (_peripheral in connectedPeripherals) {
+				NSString* ccbuuidStringTemp = _peripheral.identifier.UUIDString;
+				CBUUID * ccbuuidTemp = [CBUUID UUIDWithString:ccbuuidStringTemp];
+				[CBUUIDarray addObject:ccbuuidTemp];
+			}
+			[centralManager retrieveConnectedPeripheralsWithServices:CBUUIDarray];
+			
 			[discoveryDelegate discoveryDidRefresh];
 			break;
 		}
@@ -318,7 +329,7 @@
 /****************************************************************************/
 - (void) connectPeripheral:(CBPeripheral*)peripheral
 {
-	if (![peripheral isConnected]) {
+	if (peripheral.state != CBPeripheralStateConnected) {
 		[centralManager connectPeripheral:peripheral options:connectOptions];
 	}
 }
